@@ -1,0 +1,24 @@
+Project Topic:
+An inventroy tracking system for a hobby market that sells movies and music products.
+
+
+a. Briefly explain the topic and state member-task responsibilities.
+
+b. Design an E-R diagram based on the project topic.
+    -There must be at least 7 strong entities in the diagram.
+
+c. Draw a database schema diagramaccording to the E-R design.
+
+d. Write necessary CREATE TABLE statements (including constraint definitions) for all relations in the schema.
+
+e. Write 3 different INSERT INTO statements for each table.
+
+f. Write 8different SQL queries with their descriptions for the database created. You must write the queries based on the specified approaches below:
+    -2 joins(with conditions)
+    -2 nested queries
+    -2 set operations
+    -2 aggregate operations (must include joins)
+    
+g. Write 8 different relational algebra queries using various relational algebra operators. Add descriptions for each query.
+
+h. Write 4 different relational calculus queries. Add descriptions for eachquery.

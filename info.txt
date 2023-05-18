@@ -1,0 +1,371 @@
+a. The topic is an inventory tracking system for a hobby market that sells movies and music products. The system will be responsible for managing the inventory of movies and music products, including tracking stock levels, recording sales and purchases, and generating reports. The member-task responsibilities are as follows:
+
+- Database Designer: Responsible for designing the E-R diagram and the database schema diagram.
+- Database Administrator: Responsible for creating the necessary tables and managing the database.
+- Software Developer: Responsible for developing the inventory tracking system software.
+- Quality Assurance Tester: Responsible for testing the system and ensuring its functionality and reliability.
+- Business Analyst: Responsible for gathering requirements and providing input on system features and functionality.
+- Project Manager: Responsible for overseeing the project, coordinating team members, and ensuring timely delivery.
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+b. E-R Diagram:
+
+
+           +---------------+
+           |   Movie       |
+           +---------------+
+           | movie_id (PK) |
+           | title         |
+           | genre         |
+           | release_year  |
+           | director      |
+           | language      |
+           +---------------+
+                |      |
+                |      |
+           +----+-----+------+
+           |   Music         |
+           +-----------------+
+           | music_id (PK)   |
+           | title           |
+           | artist          |
+           | album           |
+           | genre           |
+           | release_year    |
+           | language        |
+           +-----------------+
+                |      |
+                |      |
+          +-----+------+------+   +---------------+
+          |   Inventory      |   |   Supplier    |
+          +------------------+   +---------------+
+          | inventory_id (PK)|   | supplier_id   |
+          | product_id (FK)  +---+ name          |
+          | quantity         |   | address       |
+          | unit_price       |   | contact_name  |
+          | reorder_level    |   | phone_number  |
+          +------------------+   +---------------+
+                |      |
+                |      |
+          +-----+------+-------+   +----------------+
+          |   Purchase        |   |   Sale         |
+          +-------------------+   +----------------+
+          | purchase_id (PK)   |   | sale_id (PK)   |
+          | inventory_id (FK)  |   | inventory_id   |
+          | quantity           |   | quantity       |
+          | purchase_date      |   | sale_date      |
+          | total_price        |   | total_price    |
+          +-------------------+   +----------------+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+c. Database Schema Diagram:
+
+
+        +---------------+     +-----------------+
+        |   Movie       |     |     Music       |
+        +---------------+     +-----------------+
+        | movie_id (PK) |     | music_id (PK)   |
+        | title         |     | title           |
+        | genre         |     | artist          |
+        | release_year  |     | album           |
+        | director      |     | genre           |
+        | language      |     | release_year    |
+        +---------------+     | language        |
+                              +-----------------+
+                                    |      |
+                                    |      |
+                              +-----+------+-----+   +---------------+
+                              |   Inventory      |   |   Supplier    |
+                              +------------------+   +---------------+
+                              | inventory_id (PK)|   | supplier_id   |
+                              | product_id (FK)  +---+ name          |
+                              | quantity         |   | address       |
+                              | unit_price       |   | contact_name  |
+                              | reorder_level    |   | phone_number  |
+                              +------------------+   +---------------+
+                                    |      |
+                                    |      |
+                              +-----+------+------+
+                              |   Purchase        |
+                              +-------------------+
+                              | purchase_id (PK)   |
+                              | inventory_id (FK)  |
+                              | quantity           |
+                              | purchase_date      |
+                              | total_price        |
+                              +-------------------+
+                                    |      |
+                                    |      |
+                              +-----+------+------+
+                              |   Sale            |
+                              +-------------------+
+                              | sale_id (PK)      |
+                              | inventory_id (FK) |
+                              | quantity          |
+                              | sale_date         |
+                              | total_price       |
+                              +-------------------+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+d. Here are the necessary CREATE TABLE statements for each relation in the schema:
+
+Movie Table:
+
+CREATE TABLE Movie (
+  movie_id INT PRIMARY KEY,
+  title VARCHAR(255),
+  genre VARCHAR(255),
+  release_year INT,
+  director VARCHAR(255),
+  language VARCHAR(255)
+);
+
+
+Music Table:
+
+CREATE TABLE Music (
+  music_id INT PRIMARY KEY,
+  title VARCHAR(255),
+  artist VARCHAR(255),
+  album VARCHAR(255),
+  genre VARCHAR(255),
+  release_year INT,
+  language VARCHAR(255)
+);
+
+
+Inventory Table:
+
+CREATE TABLE Inventory (
+  inventory_id INT PRIMARY KEY,
+  product_id INT,
+  quantity INT,
+  unit_price DECIMAL(10, 2),
+  reorder_level INT,
+  FOREIGN KEY (product_id) REFERENCES Movie(movie_id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES Music(music_id) ON DELETE CASCADE
+);
+
+
+Supplier Table:
+
+CREATE TABLE Supplier (
+  supplier_id INT PRIMARY KEY,
+  name VARCHAR(255),
+  address VARCHAR(255),
+  contact_name VARCHAR(255),
+  phone_number VARCHAR(255)
+);
+
+
+Purchase Table:
+
+CREATE TABLE Purchase (
+  purchase_id INT PRIMARY KEY,
+  inventory_id INT,
+  quantity INT,
+  purchase_date DATE,
+  total_price DECIMAL(10, 2),
+  FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id) ON DELETE CASCADE
+);
+
+
+Sale Table:
+
+CREATE TABLE Sale (
+  sale_id INT PRIMARY KEY,
+  inventory_id INT,
+  quantity INT,
+  sale_date DATE,
+  total_price DECIMAL(10, 2),
+  FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id) ON DELETE CASCADE
+);
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+e. Here are three different INSERT INTO statements for each table:
+
+Inserting data into the Movie table:
+
+INSERT INTO Movie (movie_id, title, genre, release_year, director, language)
+VALUES (1, 'The Shawshank Redemption', 'Drama', 1994, 'Frank Darabont', 'English');
+
+INSERT INTO Movie (movie_id, title, genre, release_year, director, language)
+VALUES (2, 'Pulp Fiction', 'Crime', 1994, 'Quentin Tarantino', 'English');
+
+INSERT INTO Movie (movie_id, title, genre, release_year, director, language)
+VALUES (3, 'Inception', 'Action', 2010, 'Christopher Nolan', 'English');
+
+
+
+Inserting data into the Music table:
+
+INSERT INTO Music (music_id, title, artist, album, genre, release_year, language)
+VALUES (1, 'Bohemian Rhapsody', 'Queen', 'A Night at the Opera', 'Rock', 1975, 'English');
+
+INSERT INTO Music (music_id, title, artist, album, genre, release_year, language)
+VALUES (2, 'Thriller', 'Michael Jackson', 'Thriller', 'Pop', 1982, 'English');
+
+INSERT INTO Music (music_id, title, artist, album, genre, release_year, language)
+VALUES (3, 'Hotel California', 'Eagles', 'Hotel California', 'Rock', 1976, 'English');
+
+
+
+Inserting data into the Inventory table:
+
+INSERT INTO Inventory (inventory_id, product_id, quantity, unit_price, reorder_level)
+VALUES (1, 1, 50, 9.99, 10);
+
+INSERT INTO Inventory (inventory_id, product_id, quantity, unit_price, reorder_level)
+VALUES (2, 2, 30, 14.99, 15);
+
+INSERT INTO Inventory (inventory_id, product_id, quantity, unit_price, reorder_level)
+VALUES (3, 3, 20, 12.99, 8);
+
+
+
+Inserting data into the Supplier table:
+
+INSERT INTO Supplier (supplier_id, name, address, contact_name, phone_number)
+VALUES (1, 'ABC Distributors', '123 Main St, City', 'John Smith', '123-456-7890');
+
+INSERT INTO Supplier (supplier_id, name, address, contact_name, phone_number)
+VALUES (2, 'XYZ Music', '456 Elm St, City', 'Jane Doe', '987-654-3210');
+
+INSERT INTO Supplier (supplier_id, name, address, contact_name, phone_number)
+VALUES (3, '123 Movies', '789 Oak St, City', 'Mike Johnson', '555-123-4567');
+
+
+These INSERT INTO statements demonstrate how to insert sample data into the tables. You can modify the values or add additional statements based on your specific requirements and data.
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+f. Here are eight different SQL queries with their descriptions for the database created:
+
+Join Query 1: Retrieve the details of a movie and its corresponding inventory information.
+
+SELECT Movie.title, Movie.genre, Movie.release_year, Inventory.quantity, Inventory.unit_price
+FROM Movie
+JOIN Inventory ON Movie.movie_id = Inventory.product_id
+WHERE Movie.movie_id = 1;
+
+
+Join Query 2: Retrieve the sales information of a music product, including the title, artist, sale date, and total price.
+
+SELECT Music.title, Music.artist, Sale.sale_date, Sale.total_price
+FROM Music
+JOIN Sale ON Music.music_id = Sale.inventory_id
+WHERE Music.music_id = 2;
+
+
+Nested Query 1: Retrieve the movies with a release year greater than the average release year of all movies.
+
+SELECT movie_id, title, genre, release_year
+FROM Movie
+WHERE release_year > (SELECT AVG(release_year) FROM Movie);
+
+
+Nested Query 2: Retrieve the inventory details of movies that have been purchased but not yet sold.
+
+SELECT inventory_id, product_id, quantity, unit_price
+FROM Inventory
+WHERE product_id IN (SELECT inventory_id FROM Purchase) AND product_id NOT IN (SELECT inventory_id FROM Sale);
+
+
+Set Operation 1: Retrieve the distinct genres from both the Movie and Music tables.
+
+SELECT genre FROM Movie
+UNION
+SELECT genre FROM Music;
+
+
+Set Operation 2: Retrieve the movies and music products that have the same genre.
+
+SELECT title, genre FROM Movie
+INTERSECT
+SELECT title, genre FROM Music;
+
+
+Aggregate Operation 1: Retrieve the total quantity and total revenue for each movie based on sales.
+
+SELECT Movie.title, SUM(Sale.quantity) AS total_quantity, SUM(Sale.total_price) AS total_revenue
+FROM Movie
+JOIN Inventory ON Movie.movie_id = Inventory.product_id
+JOIN Sale ON Inventory.inventory_id = Sale.inventory_id
+GROUP BY Movie.title;
+
+
+Aggregate Operation 2: Retrieve the average unit price and total quantity sold for each music genre.
+
+SELECT Music.genre, AVG(Inventory.unit_price) AS avg_unit_price, SUM(Sale.quantity) AS total_quantity_sold
+FROM Music
+JOIN Inventory ON Music.music_id = Inventory.product_id
+JOIN Sale ON Inventory.inventory_id = Sale.inventory_id
+GROUP BY Music.genre;
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+g. Here are eight different relational algebra queries using various relational algebra operators:
+
+Selection: Retrieve movies with a release year greater than 2000.
+σ(release_year > 2000)(Movie)
+
+Projection: Retrieve the title and genre of all movies.
+π(title, genre)(Movie)
+
+Union: Retrieve the distinct genres from both the Movie and Music tables.
+π(genre)(Movie) ∪ π(genre)(Music)
+
+Join: Retrieve the movies and their corresponding inventory details.
+Movie ⨝ Inventory
+
+Set Difference: Retrieve movies that are not in the Sale table.
+π(title)(Movie) - π(title)(σ(product_id = movie_id)(Sale ⨝ Inventory))
+
+Cartesian Product: Retrieve all possible combinations of movies and music.
+Movie × Music
+
+Rename: Rename the "title" attribute in the Movie table to "movie_title".
+ρ(movie_title/title)(Movie)
+
+Division: Retrieve the movies that have inventory available in the Inventory table.
+π(title)(Movie ÷ (π(product_id)(Inventory)))
+
+
+
+
+
+
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+h. Here are four different relational calculus queries with their descriptions:
+
+Relational Calculus Query 1: Retrieve the titles of movies released in the year 2000.
+{t.title | Movie(t) ∧ t.release_year = 2000}
+
+Description: This query uses the selection (∧) operator in conjunction with the projection (|) operator to retrieve the titles of movies from the Movie relation where the release_year attribute is equal to 2000.
+
+Relational Calculus Query 2: Retrieve the names of suppliers who have provided inventory for movies with a quantity greater than 50.
+{sup.name | Supplier(sup) ∧ ∃inv(Inventory(inv) ∧ inv.product_id = sup.supplier_id ∧ inv.quantity > 50 ∧ ∃m(Movie(m) ∧ m.movie_id = inv.product_id))}
+
+Description: This query combines multiple existential quantifiers (∃) and conjunction (∧) operators to retrieve the names of suppliers from the Supplier relation who have provided inventory for movies (with quantity greater than 50) by joining the Inventory and Movie relations based on the product_id attribute.
+
+Relational Calculus Query 3: Retrieve the titles of movies that have been both purchased and sold.
+{m.title | Movie(m) ∧ ∃p(Purchase(p) ∧ p.inventory_id = m.movie_id) ∧ ∃s(Sale(s) ∧ s.inventory_id = m.movie_id)}
+
+Description: This query utilizes existential quantifiers (∃) and conjunction (∧) operators to retrieve the titles of movies from the Movie relation that have both purchase and sale records in the Purchase and Sale relations, respectively, by checking the matching inventory_id values.
+
+Relational Calculus Query 4: Retrieve the titles of movies where the unit price in the Inventory table is greater than the average unit price of all movies.
+{m.title | Movie(m) ∧ ∃i(Inventory(i) ∧ i.product_id = m.movie_id ∧ i.unit_price > AVG(Inventory.unit_price))}
+
+Description: This query combines the average aggregation function AVG() with an existential quantifier (∃) and conjunction (∧) operators to retrieve the titles of movies from the Movie relation where the unit price in the Inventory relation is greater than the average unit price of all movies.
