@@ -1,0 +1,45 @@
+--en az bir film satın alan müşteri
+SELECT DISTINCT c.CustomerID
+FROM Customer c
+WHERE EXISTS (
+    SELECT 1
+    FROM Purchase p
+    INNER JOIN Movie m ON p.MovieID = m.MovieID
+    WHERE p.CustomerID = c.CustomerID
+);
+
+--tüm filmleri satın alan müşteri
+SELECT DISTINCT c.CustomerID
+FROM Customer c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Movie m
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Purchase p
+        WHERE p.CustomerID = c.CustomerID AND p.MovieID = m.MovieID
+    )
+);
+
+--en az bir adet satılan filmler
+SELECT DISTINCT m.Title
+FROM Movie m
+WHERE EXISTS (
+    SELECT 1
+    FROM Purchase p
+    WHERE p.MovieID = m.MovieID
+);
+
+--tüm müşterilerin satın aldığı filmler
+SELECT DISTINCT m.Title
+FROM Movie m
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Customer c
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Purchase p
+        WHERE p.CustomerID = c.CustomerID AND p.MovieID = m.MovieID
+    )
+);
+
