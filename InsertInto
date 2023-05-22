@@ -1,0 +1,74 @@
+-- customers
+INSERT INTO "Customer" ("CustomerID", "FirstName", "LastName", "Phone")
+VALUES ('1', 'John', 'Doe', '12345678904');
+
+INSERT INTO "Customer" ("CustomerID", "FirstName", "LastName", "Phone")
+VALUES ('2', 'Jane', 'Smith', '98765432106');
+
+INSERT INTO "Customer" ("CustomerID", "FirstName", "LastName", "Phone")
+VALUES ('3', 'David', 'Johnson', '45678901237');
+
+
+-- movies
+INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
+VALUES ('1', 'Inception', 'Christopher Nolan', 'Thriller', DATE '2017-06-21', '9');
+
+INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
+VALUES ('2', 'The Shawshank Redemption', 'Frank Darabont', 'Drama', DATE '2015-01-11', '8');
+
+INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
+VALUES ('3', 'The Matrix', 'Lana Wachowski', 'Action', DATE '2012-03-15', '8');
+
+
+-- songs
+INSERT INTO "Song" ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
+VALUES ('1', 'Shape of You', 'Ed Sheeran', '÷', 'Pop', '2017');
+
+INSERT INTO "Song" ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
+VALUES ('2', 'Bohemian Rhapsody', 'Queen', 'A Night at the Opera', 'Rock', '1975');
+
+INSERT INTO "Song" ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
+VALUES ('3', 'Someone Like You', 'Adele', '21', 'Pop', '2011');
+
+
+-- purchase
+INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
+VALUES ('1', '1', '2', '3', DATE '2023-05-15', 1, 'Digital');
+
+INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
+VALUES ('2', '2', '1', '2',DATE '2023-05-18', 2, 'Physical');
+
+INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
+VALUES ('3', '3', '3', '1', DATE '2023-05-19', 1, 'Digital');
+
+
+-- store
+INSERT INTO "Store" ("StoreID", "Name", "Location", "Phone", "Website")
+VALUES ('1', 'Best Movies', 'New York', '12345678902', 'www.bestmovies.com');
+
+INSERT INTO "Store" ("StoreID", "Name", "Location", "Phone", "Website")
+VALUES ('2', 'Music Galore', 'Los Angeles', '98765432106', 'www.musicgalore.com');
+
+INSERT INTO "Store" ("StoreID", "Name", "Location", "Phone", "Website")
+VALUES ('3', 'CineMusic', 'London', '45678901232', 'www.cinemusic.co.uk');
+
+
+-- supplier
+INSERT INTO "Supplier" ("SupplierID", "Name", "Address")
+VALUES ('1', 'ABC Media Supplies', '123 Main Street');
+
+INSERT INTO "Supplier" ("SupplierID", "Name", "Address")
+VALUES ('2', 'Music World Distributors', '456 Oak Avenue');
+
+INSERT INTO "Supplier" ("SupplierID", "Name", "Address")
+VALUES ('3', 'Movie Magic Suppliers', '394 York Street');
+
+--inventory
+INSERT INTO "Inventory" ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (1, 1, 123, NULL, 50);
+
+INSERT INTO "Inventory" ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (2, 2, NULL, 456, 100);
+
+INSERT INTO "Inventory" ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (2, 2, NULL, 456, 100);
