@@ -5,7 +5,7 @@ SELECT c."CustomerID", m."MovieID", m."Title", p."PurchaseDate"
 FROM "Customer" c
 JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Movie" m ON p."MovieID" = m."MovieID"
-WHERE c."FirstName" = 'John' AND c."LastName" = 'Doe';
+WHERE c."FirstName" = 'Emily' AND c."LastName" = 'Anderson';
 
 ((Retrieves the movie name and purchase date of the transaction done by user John Doe))
 
@@ -15,7 +15,7 @@ SELECT c."CustomerID", s."SongID", s."Title", p."PurchaseDate"
 FROM "Customer" c
 JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Song" s ON p."SongID" = s."SongID"
-WHERE c."FirstName" = 'John' AND c."LastName" = 'Doe';
+WHERE c."FirstName" = 'Benjamin' AND c."LastName" = 'Jhonson';
 
 ((Retrieves the song name and purchase date of the transaction done by user John Doe))
 
