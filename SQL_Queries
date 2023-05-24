@@ -7,7 +7,7 @@ JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Movie" m ON p."MovieID" = m."MovieID"
 WHERE c."FirstName" = 'Emily' AND c."LastName" = 'Anderson';
 
-((Retrieves the movie name and purchase date of the transaction done by user Emily Anderson))
+((Retrieves the movie name and purchase date of the transaction done by user Emily Anderson.))
 
 **Join Query 2:**
 
@@ -17,7 +17,7 @@ JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Song" s ON p."SongID" = s."SongID"
 WHERE c."FirstName" = 'Benjamin' AND c."LastName" = 'Johnson';
 
-((Retrieves the song name and purchase date of the transaction done by user Benjamin Johnson))
+((Retrieves the song name and purchase date of the transaction done by user Benjamin Johnson.))
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -39,17 +39,17 @@ WHERE s."Genre" IN (
   WHERE m."ReleaseYear" >= 2010
 );
 
-((Retrieves the titles and artists of songs that belong to genres that have been released since 2010))
+((Retrieves the titles and artists of songs that belong to genres that have been released since 2010.))
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 **Set Operation 1: Union **
 
-SELECT "Title", "Artist"
+SELECT "Title", "Artist", "Genre"
 FROM "Song"
 WHERE "Genre" = 'Rock'
 UNION
-SELECT "Title", "Artist"
+SELECT "Title", "Artist", "Genre"
 FROM "Song"
 WHERE "Genre" = 'Pop';
 
@@ -59,15 +59,15 @@ WHERE "Genre" = 'Pop';
 **Set Operation 2: Intersect **
 
 
-SELECT "Title", "Artist"
+SELECT "Title", "Artist", "Genre", "ReleaseYear"
 FROM "Song"
 WHERE "Genre" = 'Pop'
 INTERSECT
-SELECT "Title", "Artist"
+SELECT "Title", "Artist", "Genre", "ReleaseYear"
 FROM "Song"
-WHERE "ReleaseYear" >= 2016;
+WHERE "ReleaseYear" >= 2000;
 
-((INTERSECT operation is used to retrieve the titles and artists of songs in the "Pop" genre and intersect them with the titles and artists of songs released in or after the year 2016.))
+((INTERSECT operation is used to retrieve the titles and artists of songs in the "Pop" genre and intersect them with the titles and artists of songs released in or after the year 2000.))
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -79,7 +79,7 @@ FROM "Customer" c
 JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 GROUP BY c."FirstName", c."LastName";
 
-((Retrieves the first name, last name, and the count of purchases made by each customer))
+((Retrieves the first name, last name, and the count of purchases made by each customer.))
 
 
 **Aggregate Operation 2: MAX with JOIN**
