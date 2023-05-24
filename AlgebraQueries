@@ -2,7 +2,7 @@ Join Query 1:
 
 
 π("CustomerID", "MovieID", "Title", "PurchaseDate")(
-    σ("FirstName"='John' AND "LastName"='Doe")(
+    σ("FirstName"='Emily' AND "LastName"='Anderson")(
         "Customer" ⨝ ("Purchase" ⨝ "Movie")
     )
 )
@@ -12,7 +12,7 @@ Join Query 2:
 
 
 π("CustomerID", "SongID", "Title", "PurchaseDate")(
-    σ("FirstName"='John' AND "LastName"='Doe")(
+    σ("FirstName"='Benjamin' AND "LastName"='Johnson")(
         "Customer" ⨝ ("Purchase" ⨝ "Song")
     )
 )
@@ -50,7 +50,7 @@ Set Operation 2: Intersect
     σ("Genre" = 'Pop')("Song")
     ∩
     π("Title", "Artist")(
-        σ("ReleaseYear" >= 2016)("Song")
+        σ("ReleaseYear" >= 2010)("Song")
     )
 )
 
