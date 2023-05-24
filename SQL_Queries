@@ -15,7 +15,7 @@ SELECT c."CustomerID", s."SongID", s."Title", p."PurchaseDate"
 FROM "Customer" c
 JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Song" s ON p."SongID" = s."SongID"
-WHERE c."FirstName" = 'Benjamin' AND c."LastName" = 'Jhonson';
+WHERE c."FirstName" = 'Benjamin' AND c."LastName" = 'Johnson';
 
 ((Retrieves the song name and purchase date of the transaction done by user John Doe))
 
@@ -56,7 +56,7 @@ WHERE "Genre" = 'Pop';
 ((UNION operation is used to retrieve the titles and artists of songs in the "Rock" genre and combine them with the titles and artists of songs in the "Pop" genre.))
 
 
-**Set Operation 1: Intersect **
+**Set Operation 2: Intersect **
 
 
 SELECT "Title", "Artist"
@@ -72,7 +72,7 @@ WHERE "ReleaseYear" >= 2016;
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-**Aggregate Operation 1: COUNT with JOIN**
+**Aggregate Operation 2: COUNT with JOIN**
 
 SELECT c."FirstName", c."LastName", COUNT(p."PurchaseID") AS PurchaseCount
 FROM "Customer" c
