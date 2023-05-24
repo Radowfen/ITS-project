@@ -32,7 +32,7 @@ Nested Query 2:
 )
 --------------------
 
-Set Operation 2: UNION
+Set Operation 1: UNION
 
 π("Title", "Artist")(
     σ("Genre" = 'Rock')("Song")
