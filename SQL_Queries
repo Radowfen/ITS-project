@@ -7,7 +7,7 @@ JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Movie" m ON p."MovieID" = m."MovieID"
 WHERE c."FirstName" = 'Emily' AND c."LastName" = 'Anderson';
 
-((Retrieves the movie name and purchase date of the transaction done by user John Doe))
+((Retrieves the movie name and purchase date of the transaction done by user Emily Anderson))
 
 **Join Query 2:**
 
@@ -17,7 +17,7 @@ JOIN "Purchase" p ON c."CustomerID" = p."CustomerID"
 JOIN "Song" s ON p."SongID" = s."SongID"
 WHERE c."FirstName" = 'Benjamin' AND c."LastName" = 'Johnson';
 
-((Retrieves the song name and purchase date of the transaction done by user John Doe))
+((Retrieves the song name and purchase date of the transaction done by user Benjamin Johnson))
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -72,7 +72,7 @@ WHERE "ReleaseYear" >= 2016;
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-**Aggregate Operation 2: COUNT with JOIN**
+**Aggregate Operation 1: COUNT with JOIN**
 
 SELECT c."FirstName", c."LastName", COUNT(p."PurchaseID") AS PurchaseCount
 FROM "Customer" c
