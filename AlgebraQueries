@@ -72,8 +72,5 @@ Aggregate Operation 2: MAX with JOIN
 π("FirstName", "LastName", MAX("PurchaseDate") AS LatestPurchaseDate)(
     "Customer" ⨝ "Purchase"
     γ("FirstName", "LastName", MAX("PurchaseDate"))("Customer" ⨝ "Purchase")
-    ÷
-    π("Title", "Artist")(
-        σ("ReleaseYear" >= 2016)("Song")
-    )
 )
+    
