@@ -31,10 +31,10 @@ WHERE "CustomerID" IN (SELECT "CustomerID" FROM "Purchase");
 
 **Nested Query 2:**
 
-SELECT s."Title", s."Artist"
+SELECT s."Title", s."Artist", s."ReleaseYear"
 FROM "Song" s
-WHERE s."Genre" IN (
-  SELECT m."Genre"
+WHERE s."ReleaseYear" IN (
+  SELECT m."ReleaseYear"
   FROM "Song" m
   WHERE m."ReleaseYear" >= 2010
 );
